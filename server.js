@@ -1,5 +1,18 @@
-const app = require('./app')
+const mongoose = require("mongoose");
+const app = require("./app");
 
-app.listen(3000, () => {
-  console.log("Server running. Use our API on port: 3000")
-})
+const { DB_HOST } = process.env;
+
+mongoose
+  .connect(DB_HOST)
+  .then(() => {
+    app.listen(3000, () => {
+      console.log("Database succuess connect");
+    });
+  })
+  .catch((error) => {
+    process.exit(1);
+
+    // eslint-disable-next-line no-unreachable
+    console.log(error.message);
+  });
