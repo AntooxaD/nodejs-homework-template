@@ -23,6 +23,12 @@ const registerSchema = Joi.object({
   password: Joi.string().min(6).required(),
 });
 
+// const subSchema = Joi.object({
+//   subscription: {
+//     enum: Joi.string().patern("starter", "pro", "business"),
+//   },
+// });
+
 const regSchema = {
   register: registerSchema,
   login: registerSchema,
