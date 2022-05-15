@@ -1,4 +1,6 @@
 const Joi = require("joi");
+const emailRegex =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const contactSchema = Joi.object({
   name: Joi.string().min(3).max(30),
@@ -15,4 +17,30 @@ const contactSchema = Joi.object({
 const favoritSchema = Joi.object({
   favorite: Joi.boolean().required(),
 });
-module.exports = { contactSchema, favoritSchema };
+
+const registerSchema = Joi.object({
+  email: Joi.string().pattern(emailRegex).required(),
+  password: Joi.string().min(6).required(),
+});
+
+// const subSchema = Joi.object({
+//   subscription: {
+//     enum: Joi.string().patern("starter", "pro", "business"),
+//   },
+// });
+// const schema = joi.object().keys({
+//   query: joi
+//     .object()
+//     .keys({
+//       // allow only apple and banana
+//       id: joi.string().valid("starter", "pro", "business").required(),
+//     })
+//     .required(),
+// });
+
+const regSchema = {
+  register: registerSchema,
+  login: registerSchema,
+};
+
+module.exports = { contactSchema, favoritSchema, regSchema };

@@ -1,5 +1,5 @@
 const Contact = require("../../models/contact");
-const createError = require("../../helpers/createError");
+const { createError } = require("../../helpers/createError");
 const { favoritSchema } = require("../../models/schema");
 
 const patchByIdFav = async (req, res, next) => {
