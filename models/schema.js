@@ -28,6 +28,15 @@ const registerSchema = Joi.object({
 //     enum: Joi.string().patern("starter", "pro", "business"),
 //   },
 // });
+// const schema = joi.object().keys({
+//   query: joi
+//     .object()
+//     .keys({
+//       // allow only apple and banana
+//       id: joi.string().valid("starter", "pro", "business").required(),
+//     })
+//     .required(),
+// });
 
 const regSchema = {
   register: registerSchema,
