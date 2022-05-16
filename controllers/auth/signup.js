@@ -2,6 +2,7 @@ const { createError } = require("../../helpers/createError");
 const { regSchema } = require("../../models/schema");
 const User = require("../../models/user");
 const bcrypt = require("bcryptjs");
+const gravatar = require("gravatar");
 
 const signupUser = async (req, res, next) => {
   try {
@@ -15,9 +16,10 @@ const signupUser = async (req, res, next) => {
       throw createError(409, result.message);
     }
     const hashPassword = await bcrypt.hash(password, 10);
-    await User.create({ email, password: hashPassword });
+    const avatarURL = gravatar.url(email);
+    await User.create({ email, password: hashPassword, avatarURL });
 
-    res.status(201).json({ user: { email } });
+    res.status(201).json({ user: { email, avatarURL } });
   } catch (error) {
     next(error);
   }
